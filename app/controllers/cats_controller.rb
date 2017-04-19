@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+  before_action :check_cat_ownership, only: [:edit, :update]
+
   def index
     @cats = Cat.all
     render :index
@@ -15,7 +17,7 @@ class CatsController < ApplicationController
   end
 
   def create
-    @cat = Cat.new(cat_params)
+    @cat = Cat.new(cat_params.merge(owner_id: current_user.id))
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -25,12 +27,10 @@ class CatsController < ApplicationController
   end
 
   def edit
-    @cat = Cat.find(params[:id])
     render :edit
   end
 
   def update
-    @cat = Cat.find(params[:id])
     if @cat.update_attributes(cat_params)
       redirect_to cat_url(@cat)
     else
@@ -41,8 +41,16 @@ class CatsController < ApplicationController
 
   private
 
+  def check_cat_ownership
+    @cat = current_user.cats.find_by(id: params[:id])
+    unless @cat
+      flash[:errors] = ["This cat does not belong to #{current_user.user_name}"]
+      redirect_back fallback_location: cats_url
+    end
+  end
+
   def cat_params
     params.require(:cat)
-      .permit(:age, :birth_date, :color, :description, :name, :sex)
+          .permit(:age, :birth_date, :color, :description, :name, :sex)
   end
 end

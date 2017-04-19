@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
 
+  has_many :cats,
+    primary_key: :id,
+    foreign_key: :owner_id,
+    class_name: :Cat,
+    dependent: :destroy
+
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
   end

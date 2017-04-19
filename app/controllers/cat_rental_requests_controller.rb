@@ -1,4 +1,6 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :check_cat_ownership, only: [:approve, :deny]
+
   def approve
     current_cat_rental_request.approve!
     redirect_to cat_url(current_cat)
@@ -24,6 +26,14 @@ class CatRentalRequestsController < ApplicationController
   end
 
   private
+
+  def check_cat_ownership
+    unless current_cat.owner == current_user
+      flash[:errors] = ["Cannot manage requests for other people's cats."]
+      redirect_back fallback_location: cats_url
+    end
+  end
+
   def current_cat_rental_request
     @rental_request ||=
       CatRentalRequest.includes(:cat).find(params[:id])
