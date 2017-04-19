@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
     class_name: :Cat,
     dependent: :destroy
 
+  has_many :rental_requests,
+    primary_key: :id,
+    foreign_key: :requester_id,
+    class_name: :CatRentalRequest,
+    dependent: :destroy
+
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
   end

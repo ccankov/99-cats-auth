@@ -7,7 +7,8 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def create
-    @rental_request = CatRentalRequest.new(cat_rental_request_params)
+    full_params = cat_rental_request_params.merge(requester_id: current_user.id)
+    @rental_request = CatRentalRequest.new(full_params)
     if @rental_request.save
       redirect_to cat_url(@rental_request.cat)
     else
