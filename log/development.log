@@ -9754,3 +9754,1090 @@ Completed 200 OK in 30ms (Views: 28.4ms | ActiveRecord: 0.6ms)
 
   [1m[36mSession Load (0.9ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions"[0m
   [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started GET "/cats" for ::1 at 2017-04-19 17:37:33 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (6.9ms)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 283ms (Views: 261.4ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:37:38 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.6ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.1ms)
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 33ms (Views: 30.8ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:37:40 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered sessions/new.html.erb within layouts/application (1.6ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 20ms (Views: 17.8ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:38:00 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"988SbbjUok8K+K1vKuQvfCm1x7tqkT4zrykrWB/gUUKTF9Co+RunZxAnQTcrOFFeuc29KBPLXy0RwdRLfKEgKA==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (1.4ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "wb3I1FkMcJv9uOp4U2vk9A"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "wb3I1FkMcJv9uOp4U2vk9A"], ["user_id", 8], ["created_at", 2017-04-20 00:38:00 UTC], ["updated_at", 2017-04-20 00:38:00 UTC]]
+  [1m[35m (6.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 116ms (ActiveRecord: 14.5ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:00 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'wb3I1FkMcJv9uOp4U2vk9A') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 26ms (Views: 24.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:04 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (6.7ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'wb3I1FkMcJv9uOp4U2vk9A') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 48ms (Views: 43.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:08 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.2ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 42ms (Views: 39.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:38:10 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (1.5ms)
+  Rendered sessions/new.html.erb within layouts/application (4.8ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 29ms (Views: 24.8ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:38:14 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"h0dm/g3NBw9H5cRxW1vW/hjRsIuzugx9ye9KY/gSJDL1mfQAZNLrEKfnNxW04K02/VuIphBjvdGcb6N7TMri8g==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "mMCBzVOSPGAZW8SbtmuO7g"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "mMCBzVOSPGAZW8SbtmuO7g"], ["user_id", 8], ["created_at", 2017-04-20 00:38:14 UTC], ["updated_at", 2017-04-20 00:38:14 UTC]]
+  [1m[35m (7.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 147ms (ActiveRecord: 10.4ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:14 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'mMCBzVOSPGAZW8SbtmuO7g') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 20ms (Views: 18.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:15 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.6ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (3.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'mMCBzVOSPGAZW8SbtmuO7g') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 55ms (Views: 51.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:17 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.8ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (5.1ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'wb3I1FkMcJv9uOp4U2vk9A') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 57ms (Views: 53.3ms | ActiveRecord: 1.4ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:38:33 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"WulRBshN/SowrZxNWnl1+I9H/idJ3aMDrUQx5RHldzo+MZPDiYL4AipycBVbpQvaHz+EtDCHwh0TrM72cqQGUA=="}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'wb3I1FkMcJv9uOp4U2vk9A') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "wb3I1FkMcJv9uOp4U2vk9A"], ["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 11]]
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 15ms (ActiveRecord: 8.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:33 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.8ms)
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 37ms (Views: 34.9ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:34 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.8ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (7.2ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 52ms (Views: 46.4ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:38:37 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (2.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (9.4ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'mMCBzVOSPGAZW8SbtmuO7g') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 55ms (Views: 49.6ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:42:03 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.8ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (3.8ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 65ms (Views: 62.0ms | ActiveRecord: 1.3ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:42:19 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"aIDMAzBrljAa2QBI6GaCHksmE1AgAFYUu8iM6E5Fzp0aXl79WXR6L/rb8ywH3fnWrqwrfYPZ57juSGXw+p0IXQ=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'mMCBzVOSPGAZW8SbtmuO7g') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "mMCBzVOSPGAZW8SbtmuO7g"], ["LIMIT", 1]]
+  [1m[36mSession Load (0.5ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 12]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 14ms (ActiveRecord: 8.7ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:42:19 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 17ms (Views: 15.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:42:21 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (3.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (7.4ms)
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 71ms (Views: 65.1ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:42:23 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.7ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (4.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 45ms (Views: 42.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:47:10 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered sessions/new.html.erb within layouts/application (1.2ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 28ms (Views: 18.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:47:14 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"768UkqOZ9aWnighO75VAO2tKHaid3wyOHL4I/dV+R5mLd9ZX4lbwjb1V5BbuST4Z+zJnO+SFbZCiVvfutj828w==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "ypKVodrjhXqLab4oPQjlcw"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "ypKVodrjhXqLab4oPQjlcw"], ["user_id", 8], ["created_at", 2017-04-20 00:47:14 UTC], ["updated_at", 2017-04-20 00:47:14 UTC]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 104ms (ActiveRecord: 11.3ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:47:14 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (3.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'ypKVodrjhXqLab4oPQjlcw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 22ms (Views: 18.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:47:30 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.4ms)
+  Rendered sessions/new.html.erb within layouts/application (1.5ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 23ms (Views: 21.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:47:33 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"YFSYXY88qy7pKxQIKtdW0gmi6JCDy+exjoDcVAIepScSigqj5iNHMQkp52zFbC0a7CjQvSASVh3bADVMtsZj5w==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "m3StqH1tMmUTbEdKWXmI6Q"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "m3StqH1tMmUTbEdKWXmI6Q"], ["user_id", 8], ["created_at", 2017-04-20 00:47:33 UTC], ["updated_at", 2017-04-20 00:47:33 UTC]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 93ms (ActiveRecord: 9.1ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:47:33 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.6ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'm3StqH1tMmUTbEdKWXmI6Q') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:47:42 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.8ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (4.4ms)
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'ypKVodrjhXqLab4oPQjlcw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 86ms (Views: 82.6ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:47:42 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.6ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (4.0ms)
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'ypKVodrjhXqLab4oPQjlcw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 47ms (Views: 43.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:47:44 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.8ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (3.7ms)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'm3StqH1tMmUTbEdKWXmI6Q') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 86ms (Views: 82.7ms | ActiveRecord: 1.7ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:47:45 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"o+6BHAFdpyrxjrqobYVKVx5i4iBAJG4NaaYloubx0CLRMBPiaEJLNRGMScyCPjGf++jaDeP936E8Jsy6UikW4g=="}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'm3StqH1tMmUTbEdKWXmI6Q') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "m3StqH1tMmUTbEdKWXmI6Q"], ["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 14]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 13ms (ActiveRecord: 8.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:47:45 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.4ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 25ms (Views: 23.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:49:38 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (3.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'ypKVodrjhXqLab4oPQjlcw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 48ms (Views: 44.0ms | ActiveRecord: 0.9ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:49:40 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"+LMKWAvILinPf4DB6wT2CP/DgeqPK/N8aVMOH3YUhlWca8idSgcrAdWgbJnq2Igqb7v7efZxkmLXu/EMFVX3Pw=="}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'ypKVodrjhXqLab4oPQjlcw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.7ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "ypKVodrjhXqLab4oPQjlcw"], ["LIMIT", 1]]
+  [1m[36mSession Load (1.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 13]]
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 49ms (ActiveRecord: 20.4ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:49:40 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 32ms (Views: 30.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:49:41 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.9ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 39ms (Views: 35.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:49:43 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.6ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (3.8ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 47ms (Views: 43.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:49:52 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.3ms)
+  Rendered sessions/new.html.erb within layouts/application (1.6ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 23ms (Views: 21.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:49:56 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"MbQ5JXJn/7LapCiLv1CdUt2/Tsoej4Sa7LdPwnDd+8dDaqvbG3gTrTqm2+9Q6+aaODV2571WNTa5N6baxAU9Bw==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "0absnpoGGDlAMTUlkVY5Fw"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "0absnpoGGDlAMTUlkVY5Fw"], ["user_id", 8], ["created_at", 2017-04-20 00:49:56 UTC], ["updated_at", 2017-04-20 00:49:56 UTC]]
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 88ms (ActiveRecord: 9.3ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:49:56 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.1ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = '0absnpoGGDlAMTUlkVY5Fw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 17ms (Views: 16.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:49:58 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.2ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (6.6ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = '0absnpoGGDlAMTUlkVY5Fw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 62ms (Views: 57.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:50:00 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (1.6ms)
+  Rendered sessions/new.html.erb within layouts/application (10.0ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 70ms (Views: 63.1ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:50:03 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"labfEDx7Z2iBYNLRXOmnedHbYME6mpZbs1DZdjEoTsPxfh3VfbRiQJu/PoldNdlbQaMaUkPA90UNuCZlUmk/qQ==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "cZngJJAzVZcXyAOYmDZXxQ"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "cZngJJAzVZcXyAOYmDZXxQ"], ["user_id", 8], ["created_at", 2017-04-20 00:50:03 UTC], ["updated_at", 2017-04-20 00:50:03 UTC]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 85ms (ActiveRecord: 8.7ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:50:03 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.2ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'cZngJJAzVZcXyAOYmDZXxQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:50:05 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.6ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'cZngJJAzVZcXyAOYmDZXxQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 57ms (Views: 33.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:50:07 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.7ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = '0absnpoGGDlAMTUlkVY5Fw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 33ms (Views: 30.7ms | ActiveRecord: 0.9ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:50:14 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"l5F6S0C80Vfva5nZY3RbNIzlQZWs6UpXNhq6pQAkRQPzSbiOAXPUf/W0dYFiqCUWHJ07BtWzK0mI8kW2Y2U0aQ=="}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'cZngJJAzVZcXyAOYmDZXxQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (1.0ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "cZngJJAzVZcXyAOYmDZXxQ"], ["LIMIT", 1]]
+  [1m[36mSession Load (1.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 16]]
+  [1m[35m (8.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 31ms (ActiveRecord: 14.1ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:50:14 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.7ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 26ms (Views: 24.5ms | ActiveRecord: 0.9ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:50:20 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"FgOGFT6isxp580SssvRrkYcqnKwSr7ZdObwLS8hr/nZk3RTrV71fBZnxt8hdTxBZYqCkgbF2B/FsPOJTfLM4tg=="}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = '0absnpoGGDlAMTUlkVY5Fw') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.9ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "0absnpoGGDlAMTUlkVY5Fw"], ["LIMIT", 1]]
+  [1m[36mSession Load (0.9ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 15]]
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 27ms (ActiveRecord: 12.9ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:50:20 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.0ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (5.6ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 67ms (Views: 64.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:52:55 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.1ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (8.5ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 77ms (Views: 73.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:56:32 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (9.5ms)
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 298ms (Views: 275.7ms | ActiveRecord: 5.9ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:56:35 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  Rendered sessions/new.html.erb within layouts/application (2.3ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 33ms (Views: 30.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:56:38 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"vRl10gAuaxs/zVKQ28Vi8m+EAAQX8gwO19inaZ7He/zZwbcXQeFuMyUSvsjaGRzQ//x6l26obRBpMFh6/YYKlg==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "tHflU8XlRoe9CkAlNJnXEQ"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "tHflU8XlRoe9CkAlNJnXEQ"], ["user_id", 8], ["created_at", 2017-04-20 00:56:38 UTC], ["updated_at", 2017-04-20 00:56:38 UTC]]
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 107ms (ActiveRecord: 10.7ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:56:38 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.9ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'tHflU8XlRoe9CkAlNJnXEQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 52ms (Views: 50.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/cats/new" for ::1 at 2017-04-19 17:56:40 -0700
+Processing by CatsController#new as HTML
+  Rendering cats/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.8ms)
+  Rendered cats/_form.html.erb (2.9ms)
+  Rendered cats/new.html.erb within layouts/application (6.6ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'tHflU8XlRoe9CkAlNJnXEQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 67ms (Views: 51.2ms | ActiveRecord: 2.4ms)
+
+
+Started POST "/cats" for ::1 at 2017-04-19 17:56:54 -0700
+Processing by CatsController#create as HTML
+  Parameters: {"authenticity_token"=>"F3l0itFgYpazp0S8q5q1TkQzwisO2QQQJZB4348FyMdzobZPkK9nvql4qOSqRsts1Eu4uHeDZQ6beIfM7ES5rQ==", "cat"=>{"name"=>"Sylvester", "birth_date"=>"2004-01-15", "color"=>"black", "sex"=>"M", "description"=>"Eats Tweety's"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'tHflU8XlRoe9CkAlNJnXEQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "cats" ("birth_date", "color", "name", "sex", "description", "created_at", "updated_at", "owner_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["birth_date", Thu, 15 Jan 2004], ["color", "black"], ["name", "Sylvester"], ["sex", "M"], ["description", "Eats Tweety's"], ["created_at", 2017-04-20 00:56:55 UTC], ["updated_at", 2017-04-20 00:56:55 UTC], ["owner_id", 8]]
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats/3
+Completed 302 Found in 29ms (ActiveRecord: 9.6ms)
+
+
+Started GET "/cats/3" for ::1 at 2017-04-19 17:56:55 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCat Load (0.2ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (1.4ms)
+  [1m[36mCatRentalRequest Load (0.5ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 3]]
+  Rendered cats/show.html.erb within layouts/application (12.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'tHflU8XlRoe9CkAlNJnXEQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 83ms (Views: 42.6ms | ActiveRecord: 2.6ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:56:56 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"9tKG0zYyGULMwOENouZikuC1lZswGy6wBAFZC39NlH2SCkQWd/0catYfDVWjOhywcM3vCElBT6666aYYHAzlFw=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'tHflU8XlRoe9CkAlNJnXEQ') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "tHflU8XlRoe9CkAlNJnXEQ"], ["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 17], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 17]]
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 15ms (ActiveRecord: 8.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:56:56 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (1.5ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 31ms (Views: 29.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:56:57 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered sessions/new.html.erb within layouts/application (3.0ms)
+  [1m[36mCACHE (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 29ms (Views: 27.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/new" for ::1 at 2017-04-19 17:57:02 -0700
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.3ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 52ms (Views: 46.0ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/users" for ::1 at 2017-04-19 17:57:06 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"v2zR6usKghdnwOCPbdpmUipcCgw1dIrLnSnP8jveG9/btBMvqsWHP30fDNdsBhhwuiRwn0wu69UjwTDhWJ9qtQ==", "user"=>{"user_name"=>"user2", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user2"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("user_name", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_name", "user2"], ["password_digest", "$2a$10$56USjEm1NunSuL4Q5fu4lOQjuv9bzMNj/3rUlmtN59iCH/IiOa.v6"], ["created_at", 2017-04-20 00:57:06 UTC], ["updated_at", 2017-04-20 00:57:06 UTC]]
+  [1m[36mSession Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "bEFRUfTbXe5-6mZoeLsh2w"], ["user_id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "bEFRUfTbXe5-6mZoeLsh2w"], ["user_id", 9], ["created_at", 2017-04-20 00:57:06 UTC], ["updated_at", 2017-04-20 00:57:06 UTC]]
+  [1m[35m (7.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "kwE5OTc6nc2W37H0fd5Dng"], ["user_id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "kwE5OTc6nc2W37H0fd5Dng"], ["user_id", 9], ["created_at", 2017-04-20 00:57:06 UTC], ["updated_at", 2017-04-20 00:57:06 UTC]]
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 106ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:57:06 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 32ms (Views: 30.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/cats/new" for ::1 at 2017-04-19 17:57:08 -0700
+Processing by CatsController#new as HTML
+  Rendering cats/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  Rendered cats/_form.html.erb (5.7ms)
+  Rendered cats/new.html.erb within layouts/application (8.2ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 63ms (Views: 61.1ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/cats" for ::1 at 2017-04-19 17:57:35 -0700
+Processing by CatsController#create as HTML
+  Parameters: {"authenticity_token"=>"KwqnkpFdh4FF/6vYN0aIHpM+gYvrKKHliltDUbo/jOVP0mVX0JKCqV8gR4A2mvY8A0b7GJJywPs0s7xC2X79jw==", "cat"=>{"name"=>"Tom", "birth_date"=>"1994-02-15", "color"=>"white", "sex"=>"M", "description"=>"Eats Jerry's"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "cats" ("birth_date", "color", "name", "sex", "description", "created_at", "updated_at", "owner_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["birth_date", Tue, 15 Feb 1994], ["color", "white"], ["name", "Tom"], ["sex", "M"], ["description", "Eats Jerry's"], ["created_at", 2017-04-20 00:57:35 UTC], ["updated_at", 2017-04-20 00:57:35 UTC], ["owner_id", 9]]
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats/4
+Completed 302 Found in 23ms (ActiveRecord: 9.4ms)
+
+
+Started GET "/cats/4" for ::1 at 2017-04-19 17:57:35 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mCat Load (1.8ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (1.2ms)
+  [1m[36mCatRentalRequest Load (0.4ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 4]]
+  Rendered cats/show.html.erb within layouts/application (7.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 50ms (Views: 42.1ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:57:40 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.8ms)
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 46ms (Views: 43.3ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/cats/3" for ::1 at 2017-04-19 17:57:42 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  [1m[36mCatRentalRequest Load (0.5ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 3]]
+  Rendered cats/show.html.erb within layouts/application (6.2ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 44ms (Views: 39.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/cats/3/edit" for ::1 at 2017-04-19 17:57:45 -0700
+Processing by CatsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCat Load (0.8ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."owner_id" = $1 AND "cats"."id" = $2 LIMIT $3[0m  [["owner_id", 9], ["id", 3], ["LIMIT", 1]]
+Redirected to http://localhost:3000/cats/3
+Filter chain halted as :check_cat_ownership rendered or redirected
+Completed 302 Found in 16ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/cats/3" for ::1 at 2017-04-19 17:57:45 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCat Load (0.6ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  [1m[36mCatRentalRequest Load (0.4ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 3]]
+  Rendered cats/show.html.erb within layouts/application (3.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 43ms (Views: 39.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/cat_rental_requests" for ::1 at 2017-04-19 17:57:51 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/cat_rental_requests"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+rack (2.0.1) lib/rack/handler/webrick.rb:86:in `service'
+/home/chris/.rbenv/versions/2.3.1/lib64/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+/home/chris/.rbenv/versions/2.3.1/lib64/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+/home/chris/.rbenv/versions/2.3.1/lib64/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+  Rendering /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered collection of /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [17 times] (10.9ms)
+  Rendered /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (10.0ms)
+  Rendering /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/chris/.rbenv/versions/2.3.1/lib64/ruby/gems/2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (56.9ms)
+Started GET "/cat_rental_requests/new" for ::1 at 2017-04-19 17:57:54 -0700
+Processing by CatRentalRequestsController#new as HTML
+  Rendering cat_rental_requests/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.8ms)
+  [1m[36mCat Load (0.8ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cat_rental_requests/new.html.erb within layouts/application (7.5ms)
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 70ms (Views: 39.6ms | ActiveRecord: 5.4ms)
+
+
+Started POST "/cat_rental_requests" for ::1 at 2017-04-19 17:58:04 -0700
+Processing by CatRentalRequestsController#create as HTML
+  Parameters: {"authenticity_token"=>"bIotHNZNEuDudxJGAT5z/0ov22wg8bB8+2NkxkWpqdcIUu/Zl4IXyPSo/h4A4g3d2leh/1mr0WJFi5vVJujYvQ==", "cat_rental_request"=>{"cat_id"=>"3", "start_date"=>"2017-04-24", "end_date"=>"2017-04-28"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "cat_rental_requests" WHERE ("cat_rental_requests"."id" IS NOT NULL) AND "cat_rental_requests"."cat_id" = $1 AND (         NOT( (start_date > '2017-04-28') OR (end_date < '2017-04-24') )
+) AND (status = 'APPROVED')[0m  [["cat_id", 3]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "cat_rental_requests" ("cat_id", "end_date", "start_date", "status", "created_at", "updated_at", "requester_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["cat_id", 3], ["end_date", Fri, 28 Apr 2017], ["start_date", Mon, 24 Apr 2017], ["status", "PENDING"], ["created_at", 2017-04-20 00:58:04 UTC], ["updated_at", 2017-04-20 00:58:04 UTC], ["requester_id", 9]]
+  [1m[35m (8.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Redirected to http://localhost:3000/cats/3
+Completed 302 Found in 33ms (ActiveRecord: 12.0ms)
+
+
+Started GET "/cats/3" for ::1 at 2017-04-19 17:58:04 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  [1m[36mCatRentalRequest Load (1.2ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 3]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered cats/_req_tr.html.erb (7.8ms)
+  Rendered cats/show.html.erb within layouts/application (22.7ms)
+Completed 200 OK in 56ms (Views: 50.3ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/cats/3" for ::1 at 2017-04-19 17:58:07 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.8ms)
+  [1m[36mCatRentalRequest Load (0.4ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 3]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (16.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered cats/_req_tr.html.erb (24.1ms)
+  Rendered cats/show.html.erb within layouts/application (33.7ms)
+Completed 200 OK in 71ms (Views: 47.9ms | ActiveRecord: 18.4ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:58:12 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.6ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (11.5ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 68ms (Views: 63.3ms | ActiveRecord: 2.2ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:58:13 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"cBZ7kYZgA1ZmZBdajZ8y2Ns+h3WAO6pe0eKmIMwOBJcUzrlUx68Gfny7+wKMQ0z6S0b95vlhy0BvClkzr091/Q=="}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'kwE5OTc6nc2W37H0fd5Dng') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.5ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "kwE5OTc6nc2W37H0fd5Dng"], ["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 19]]
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 16ms (ActiveRecord: 9.5ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:58:13 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.7ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 44ms (Views: 41.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 17:58:15 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.7ms)
+  Rendered sessions/new.html.erb within layouts/application (3.0ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 40ms (Views: 35.3ms | ActiveRecord: 2.5ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 17:58:19 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"WMyk0qLA7j/rdT5bLqXpp3CrUcUbX1pXPpfYmJ076ZI8FGYX4w/rF/Gq0gMveZeF4NMrVmIFO0mAfyeL/nqY+A==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "iO03ThyubjFWlQcEDLS9Ew"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "iO03ThyubjFWlQcEDLS9Ew"], ["user_id", 8], ["created_at", 2017-04-20 00:58:19 UTC], ["updated_at", 2017-04-20 00:58:19 UTC]]
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 136ms (ActiveRecord: 12.2ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:58:19 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.2ms)
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'iO03ThyubjFWlQcEDLS9Ew') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 34ms (Views: 31.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/cats/3" for ::1 at 2017-04-19 17:58:20 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.4ms)
+  [1m[36mCatRentalRequest Load (1.2ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 3]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'iO03ThyubjFWlQcEDLS9Ew') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered cats/_req_tr.html.erb (8.2ms)
+  Rendered cats/show.html.erb within layouts/application (20.3ms)
+Completed 200 OK in 55ms (Views: 49.1ms | ActiveRecord: 3.3ms)
+
+
+Started POST "/cat_rental_requests/5/approve" for ::1 at 2017-04-19 17:58:22 -0700
+Processing by CatRentalRequestsController#approve as HTML
+  Parameters: {"authenticity_token"=>"oK+85hViHLtagJbZyDrzH9MTBanUCX4T/9i3RGg6ttTEd34jVK0Zk0BfeoHJ5o09Q2t/Oq1THw1BMEhXC3vHvg==", "id"=>"5"}
+  [1m[36mCatRentalRequest Load (0.5ms)[0m  [1m[34mSELECT  "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT "cats".* FROM "cats" WHERE "cats"."id" = 3[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'iO03ThyubjFWlQcEDLS9Ew') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "cat_rental_requests" WHERE ("cat_rental_requests"."id" != $1) AND "cat_rental_requests"."cat_id" = $2 AND (         NOT( (start_date > '2017-04-28') OR (end_date < '2017-04-24') )
+) AND (status = 'APPROVED')[0m  [["id", 5], ["cat_id", 3]]
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "cat_rental_requests" SET "status" = $1, "updated_at" = $2 WHERE "cat_rental_requests"."id" = $3[0m  [["status", "APPROVED"], ["updated_at", 2017-04-20 00:58:22 UTC], ["id", 5]]
+  [1m[35mSQL (3.6ms)[0m  [1m[33mUPDATE "cat_rental_requests" SET "status" = 'DENIED' WHERE ("cat_rental_requests"."id" != $1) AND "cat_rental_requests"."cat_id" = $2 AND (         NOT( (start_date > '2017-04-28') OR (end_date < '2017-04-24') )
+) AND (status = 'PENDING')[0m  [["id", 5], ["cat_id", 3]]
+  [1m[35m (8.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats/3
+Completed 302 Found in 31ms (ActiveRecord: 14.7ms)
+
+
+Started GET "/cats/3" for ::1 at 2017-04-19 17:58:22 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  [1m[36mCatRentalRequest Load (1.4ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 3]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9[0m
+  Rendered cats/_req_tr.html.erb (1.1ms)
+  Rendered cats/show.html.erb within layouts/application (8.3ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'iO03ThyubjFWlQcEDLS9Ew') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 62ms (Views: 51.3ms | ActiveRecord: 2.7ms)
+
+
+Started DELETE "/session" for ::1 at 2017-04-19 17:58:24 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"srIRB43gAbrNOm1p95NBc9br0aIk8eRcJ0+zJ1RY857WatPCzC8EktflgTH2Tz9RRpOrMV2rhUKZp0w0NxmC9A=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'iO03ThyubjFWlQcEDLS9Ew') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."session_token" = $1 LIMIT $2[0m  [["session_token", "iO03ThyubjFWlQcEDLS9Ew"], ["LIMIT", 1]]
+  [1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  "sessions".* FROM "sessions" WHERE "sessions"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "sessions" WHERE "sessions"."id" = $1[0m  [["id", 20]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 13ms (ActiveRecord: 8.2ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:58:24 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.6ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 34ms (Views: 31.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 17:58:26 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.2ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (11.8ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 85ms (Views: 80.8ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 22:06:35 -0700
+
+PG::ConnectionBad - could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+:
+  activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:671:in `connect'
+  activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:217:in `initialize'
+  activerecord (5.0.2) lib/active_record/connection_adapters/postgresql_adapter.rb:37:in `postgresql_connection'
+  activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:729:in `new_connection'
+  activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:773:in `checkout_new_connection'
+  activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:752:in `try_to_checkout_new_connection'
+  activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:713:in `acquire_connection'
+  activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:490:in `checkout'
+  activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:364:in `connection'
+  activerecord (5.0.2) lib/active_record/connection_adapters/abstract/connection_pool.rb:883:in `retrieve_connection'
+  activerecord (5.0.2) lib/active_record/connection_handling.rb:128:in `retrieve_connection'
+  activerecord (5.0.2) lib/active_record/connection_handling.rb:91:in `connection'
+  activerecord (5.0.2) lib/active_record/migration.rb:559:in `connection'
+  activerecord (5.0.2) lib/active_record/migration.rb:546:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+  activesupport (5.0.2) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+  activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+  activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+  actionpack (5.0.2) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+  railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+  railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+  activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+  activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+  railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+  rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+  rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+  activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+  rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+  railties (5.0.2) lib/rails/engine.rb:522:in `call'
+  rack (2.0.1) lib/rack/handler/webrick.rb:86:in `service'
+  /home/chris/.rbenv/versions/2.3.1/lib64/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/chris/.rbenv/versions/2.3.1/lib64/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/chris/.rbenv/versions/2.3.1/lib64/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+Started POST "/__better_errors/1652380d4a120722/variables" for ::1 at 2017-04-19 22:06:36 -0700
+Started GET "/cats" for ::1 at 2017-04-19 22:07:16 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (1.7ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (20.2ms)
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 322ms (Views: 289.8ms | ActiveRecord: 14.1ms)
+
+
+Started GET "/session/new" for ::1 at 2017-04-19 22:07:20 -0700
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  Rendered sessions/new.html.erb within layouts/application (3.0ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 43ms (Views: 41.0ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/session" for ::1 at 2017-04-19 22:07:29 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"tB8ZZuNdBb8q6M4Ly46zeZhr1sJtt3UesItBTiy7++bQx9ujopIAlzA3IlPKUs1bCBOsURTtFAAOY75dT/qKjA==", "user"=>{"user_name"=>"user1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = NULL) ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."user_name" = $1 LIMIT $2[0m  [["user_name", "user1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSession Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "sessions" WHERE "sessions"."session_token" = $1 AND "sessions"."user_id" = $2 LIMIT $3[0m  [["session_token", "Hc0ps2l9ppBCIcQ40J-bog"], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "sessions" ("session_token", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["session_token", "Hc0ps2l9ppBCIcQ40J-bog"], ["user_id", 8], ["created_at", 2017-04-20 05:07:29 UTC], ["updated_at", 2017-04-20 05:07:29 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats
+Completed 302 Found in 113ms (ActiveRecord: 11.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 22:07:29 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (2.8ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'Hc0ps2l9ppBCIcQ40J-bog') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 36ms (Views: 34.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/cats/new" for ::1 at 2017-04-19 22:07:35 -0700
+Processing by CatsController#new as HTML
+  Rendering cats/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.7ms)
+  Rendered cats/_form.html.erb (1.8ms)
+  Rendered cats/new.html.erb within layouts/application (6.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'Hc0ps2l9ppBCIcQ40J-bog') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 32ms (Views: 30.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/cats" for ::1 at 2017-04-19 22:08:46 -0700
+Processing by CatsController#create as HTML
+  Parameters: {"authenticity_token"=>"dJ4hK0nctvoZivbF7lSVUZqb8ewvaSJeM4cMEiER8+YQRuPuCBOz0gNVGp3viOtzCuOLf1YzQ0CNb/MBQlCCjA==", "cat"=>{"name"=>"Purrty", "birth_date"=>"2010-01-14", "color"=>"orange", "sex"=>"F", "description"=>"She's a purrty cat."}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'Hc0ps2l9ppBCIcQ40J-bog') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "cats" ("birth_date", "color", "name", "sex", "description", "created_at", "updated_at", "owner_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["birth_date", Thu, 14 Jan 2010], ["color", "orange"], ["name", "Purrty"], ["sex", "F"], ["description", "She's a purrty cat."], ["created_at", 2017-04-20 05:08:46 UTC], ["updated_at", 2017-04-20 05:08:46 UTC], ["owner_id", 8]]
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/cats/5
+Completed 302 Found in 23ms (ActiveRecord: 9.2ms)
+
+
+Started GET "/cats/5" for ::1 at 2017-04-19 22:08:46 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCat Load (0.2ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.5ms)
+  [1m[36mCatRentalRequest Load (2.2ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 5]]
+  Rendered cats/show.html.erb within layouts/application (8.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'Hc0ps2l9ppBCIcQ40J-bog') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 51ms (Views: 25.2ms | ActiveRecord: 3.6ms)
+
+
