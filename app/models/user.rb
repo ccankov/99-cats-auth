@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_reader :password
+  attr_reader :email
 
   validates :user_name, :password_digest, presence: true
   validates :password, presence: { limit: 6, allow_nil: true }
@@ -45,6 +46,10 @@ class User < ActiveRecord::Base
 
   def delete_session!
     @session.destroy
+  end
+
+  def email
+    self.user_name + '@fake.com'
   end
 
   def password=(password)
