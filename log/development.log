@@ -10841,3 +10841,24 @@ Processing by CatsController#show as HTML
 Completed 200 OK in 51ms (Views: 25.2ms | ActiveRecord: 3.6ms)
 
 
+Started GET "/cats/5" for ::1 at 2017-04-19 22:18:32 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCat Load (0.7ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering cats/show.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (0.6ms)
+  [1m[36mCatRentalRequest Load (0.4ms)[0m  [1m[34mSELECT "cat_rental_requests".* FROM "cat_rental_requests" WHERE "cat_rental_requests"."cat_id" = $1 ORDER BY start_date[0m  [["cat_id", 5]]
+  Rendered cats/show.html.erb within layouts/application (4.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'Hc0ps2l9ppBCIcQ40J-bog') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 42ms (Views: 36.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/cats" for ::1 at 2017-04-19 22:18:40 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.5ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  Rendered cats/index.html.erb within layouts/application (3.7ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "sessions" ON "sessions"."user_id" = "users"."id" WHERE (sessions.session_token = 'Hc0ps2l9ppBCIcQ40J-bog') ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 38ms (Views: 35.3ms | ActiveRecord: 1.0ms)
+
+
