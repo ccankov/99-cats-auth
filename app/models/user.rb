@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
   attr_reader :password
 
-  validates :user_name, :password_digest, :session_token, presence: true
+  validates :user_name, :password_digest, presence: true
   validates :password, presence: { limit: 6, allow_nil: true }
-  validates :session_token, :user_name, uniqueness: true
-
-  before_validation :ensure_session_token
+  validates :user_name, uniqueness: true
 
   has_many :cats,
     primary_key: :id,
@@ -19,9 +17,11 @@ class User < ActiveRecord::Base
     class_name: :CatRentalRequest,
     dependent: :destroy
 
-  def self.generate_session_token
-    SecureRandom.urlsafe_base64(16)
-  end
+  has_many :sessions,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :Session,
+    dependent: :destroy
 
   def self.find_by_credentials(username, password)
     user = User.find_by(user_name: username)
@@ -29,14 +29,22 @@ class User < ActiveRecord::Base
     user.is_password?(password) ? user : nil
   end
 
-  def ensure_session_token
-    self.session_token ||= self.class.generate_session_token
+  def self.find_by_session_token(session_token)
+    User.joins(:sessions).where('sessions.session_token = ?', session_token)
+        .first
   end
 
-  def reset_session_token!
-    self.session_token = self.class.generate_session_token
-    self.save!
-    self.session_token
+  def ensure_session
+    @session ||= Session.create_session(self)
+  end
+
+  def create_session!
+    @session = Session.create_session(self)
+    @session.session_token
+  end
+
+  def delete_session!
+    @session.destroy
   end
 
   def password=(password)
@@ -46,5 +54,12 @@ class User < ActiveRecord::Base
 
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
+  end
+
+  def save_plus_session
+    User.transaction do
+      self.save!
+      ensure_session
+    end
   end
 end
